@@ -78,10 +78,11 @@ Use lowercase for all values. For cell line samples, use `not applicable` or spe
 `characteristics[organism part]` should be the main normalized anatomical term in the metadata.
 Use the clearest ontology-backed anatomy term available for cross-study integration and grouping.
 When additional hierarchy is useful, `characteristics[tissue supergroup]` can capture a broader
-bucket such as a major organ or anatomical system, while `characteristics[sampling site]` can
-capture the original source label, local provenance, or a more specific context. `sampling site`
-may be equal to `organism part` when no finer distinction exists, and may sometimes be less
-ontologically precise than the normalized `organism part`.
+bucket such as `heart`, `liver`, `brain`, or a higher-level system like `gastrointestinal tract`,
+while `characteristics[sampling site]` can capture the original source label, local provenance,
+or a more specific context. `sampling site` may be equal to `organism part` when no finer
+distinction exists, and may sometimes be less ontologically precise than the normalized
+`organism part`.
 
 [NOTE]
 ====

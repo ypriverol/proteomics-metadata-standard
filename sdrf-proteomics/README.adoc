@@ -296,7 +296,7 @@ The Sample metadata section provides information about the samples of origin and
 
 - *source name*: Unique sample name (it can be present multiple times if the same sample is used several times in the same dataset)
 - *characteristics[organism]*: The organism of the Sample of origin. Values MUST come from https://www.ebi.ac.uk/ols4/ontologies/ncbitaxon[NCBI Taxonomy].
-- *characteristics[organism part]*: The main normalized anatomical term for the sample (e.g., liver). Values SHOULD come from https://www.ebi.ac.uk/ols4/ontologies/uberon[UBERON] or https://www.ebi.ac.uk/ols4/ontologies/bto[BTO]. Use the clearest ontology-backed anatomy term available for cross-study integration; `characteristics[tissue supergroup]` can be used separately for broader organ/system grouping and `characteristics[sampling site]` for finer provenance. `characteristics[sampling site]` may be equal to `characteristics[organism part]` when no distinction exists.
+- *characteristics[organism part]*: The main normalized anatomical term for the sample (e.g., liver). Values SHOULD come from https://www.ebi.ac.uk/ols4/ontologies/uberon[UBERON] or https://www.ebi.ac.uk/ols4/ontologies/bto[BTO]. Use the clearest ontology-backed anatomy term available for cross-study integration; `characteristics[tissue supergroup]` can be used separately for broader organ/system grouping with values such as `heart`, `liver`, `brain`, or `gastrointestinal tract`, and `characteristics[sampling site]` for finer provenance. `characteristics[sampling site]` may be equal to `characteristics[organism part]` when no distinction exists.
 - *characteristics[disease]*: The disease under study in the Sample. Values SHOULD come from https://www.ebi.ac.uk/ols4/ontologies/mondo[MONDO], https://www.ebi.ac.uk/ols4/ontologies/efo[EFO], or https://www.ebi.ac.uk/ols4/ontologies/doid[DOID]. For healthy/control samples, use `normal` (https://www.ebi.ac.uk/ols4/ontologies/pato/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPATO_0000461[PATO:0000461]) - see link:SAMPLE-GUIDELINES.adoc#disease-annotation[Disease Annotation Guidelines].
 - *characteristics[cell type]*: A cell type is a distinct morphological or functional form of cell (e.g., epithelial, glial). Values SHOULD come from https://www.ebi.ac.uk/ols4/ontologies/cl[Cell Ontology (CL)], https://www.ebi.ac.uk/ols4/ontologies/bto[BTO], or https://www.ebi.ac.uk/ols4/ontologies/clo[Cell Line Ontology (CLO)].
 
@@ -961,7 +961,7 @@ SDRF template with shared sample metadata columns (organism, tissue, disease). T
 | optional
 | Broader anatomical bucket or system-level grouping used alongside the organism part
 | ontology: uberon, bto
-| digestive system, nervous system, cardiovascular system, gastrointestinal tract
+| heart, liver, brain, gastrointestinal tract
 
 | `characteristics[cell type]`
 | recommended
@@ -1603,7 +1603,7 @@ SDRF template for clinical study samples with treatment, demographics, and lifes
 | optional
 | Broader anatomical bucket or system-level grouping used alongside the organism part
 | ontology: uberon, bto
-| digestive system, nervous system, cardiovascular system, gastrointestinal tract
+| heart, liver, brain, gastrointestinal tract
 
 | `characteristics[sampling site]`
 | optional
@@ -2076,7 +2076,7 @@ SDRF template for cell line samples with Cellosaurus-based annotation. Cell line
 | optional
 | Broader anatomical bucket or system-level grouping used alongside the organism part
 | ontology: uberon, bto
-| reproductive system, urinary system, digestive system
+| heart, liver, brain, gastrointestinal tract
 
 | `characteristics[sampling site]`
 | optional
