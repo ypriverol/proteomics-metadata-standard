@@ -19,6 +19,8 @@ from resolve_templates import (
     resolve_template,
     resolve_all,
 )
+from build_sdrf_builder_data import _compact_validators, _example_value
+from generate_templates_appendix import _collect_examples, _summarize_validators
 
 METADATA_FIELDS = [
     "name",
@@ -240,6 +242,25 @@ class TestBuildTemplatePages:
             assert "characteristics[organism]" in html  # inherited
             assert "source name" in html  # from base
             assert "Contributors" in html
+
+
+class TestNullValidatorParams:
+    def test_builder_data_helpers_handle_null_params(self):
+        """Builder data helpers should treat null validator params as empty."""
+        column = {
+            "name": "comment[data file]",
+            "validators": [{"validator_name": "pattern", "params": None}],
+        }
+
+        assert _compact_validators(column["validators"]) == [{"type": "pattern"}]
+        assert _example_value(column) == "sample1.raw"
+
+    def test_appendix_helpers_handle_null_params(self):
+        """Appendix helpers should not crash when validator params are null."""
+        validators = [{"validator_name": "values", "params": None}]
+
+        assert _summarize_validators(validators) == "values: "
+        assert _collect_examples(validators) == ""
 
 
 # --- build_index_templates script ---

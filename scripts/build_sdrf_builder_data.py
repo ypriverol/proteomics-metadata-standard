@@ -28,6 +28,12 @@ FALLBACK_EXAMPLES: dict[str, str] = {
 }
 
 
+def _validator_params(validator: dict[str, Any]) -> dict[str, Any]:
+    """Return validator params as a dict, normalizing null to empty."""
+    params = validator.get("params")
+    return params if isinstance(params, dict) else {}
+
+
 def _compact_validators(validators: list[dict] | None) -> list[dict]:
     """Return a compact representation of validators."""
     if not validators:
@@ -35,7 +41,7 @@ def _compact_validators(validators: list[dict] | None) -> list[dict]:
     result = []
     for v in validators:
         compact: dict[str, Any] = {"type": v.get("validator_name", "")}
-        params = v.get("params", {})
+        params = _validator_params(v)
         if params:
             compact["params"] = params
         result.append(compact)
@@ -46,7 +52,7 @@ def _example_value(column: dict) -> str:
     """Derive an example value for a column from validators or fallbacks."""
     validators = column.get("validators") or []
     for v in validators:
-        params = v.get("params", {})
+        params = _validator_params(v)
         if params.get("examples"):
             return str(params["examples"][0])
         if params.get("values"):

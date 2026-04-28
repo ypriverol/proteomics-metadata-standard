@@ -48,6 +48,12 @@ TEMPLATE_ORDER: list[list[str]] = [
 ]
 
 
+def _validator_params(validator: dict[str, Any]) -> dict[str, Any]:
+    """Return validator params as a dict, normalizing null to empty."""
+    params = validator.get("params")
+    return params if isinstance(params, dict) else {}
+
+
 def _escape_adoc(text: str) -> str:
     """Escape special AsciiDoc characters in table cells."""
     return text.replace("|", "\\|")
@@ -61,7 +67,7 @@ def _summarize_validators(validators: list[dict[str, Any]]) -> str:
     parts: list[str] = []
     for v in validators:
         vname = v.get("validator_name", "")
-        params = v.get("params", {})
+        params = _validator_params(v)
 
         if vname == "ontology":
             ontologies = params.get("ontologies", [])
@@ -104,7 +110,7 @@ def _collect_examples(validators: list[dict[str, Any]]) -> str:
     """Collect example values from validators."""
     examples: list[str] = []
     for v in validators:
-        params = v.get("params", {})
+        params = _validator_params(v)
         for ex in params.get("examples", []):
             ex_str = str(ex)
             if ex_str not in examples:
